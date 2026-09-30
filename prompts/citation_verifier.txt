@@ -1,4 +1,0 @@
-CITATION VERIFICATION RULES:
-1. Every cited source ID or statute section in an AI response must exist in the provided grounding source list.
-2. If a section or statute is mentioned that does not exist in the source database, flag it as unverified/hallucinated.
-3. Replace or remove fabricated citations with explicit notes stating that no verified source was found in the demo knowledge base.
