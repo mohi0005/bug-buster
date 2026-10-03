@@ -1,41 +1,28 @@
-# CivicAI — Citizen Grievance Intelligence System
+# Bug Buster — Multimodal Error Diagnosis & Remediation
 
-> **Track 1: AI for Digital Public Infrastructure & Governance**  
-> **Tagline:** AI-powered citizen grievance intelligence for faster public-service response.
+> **MLH Hacktoberfest Hack Day Hyderabad**  
+> **Challenge:** Best Use of Gemma 4  
+> **Core Workflow:** `Screenshot → Gemma 4 → Structured Analysis → Actionable Result`
 
 ---
 
 ## 📌 Overview
 
-CivicAI converts unstructured citizen complaints submitted in natural language into actionable, structured cases for municipal public-service teams.
+**Bug Buster** lets developers and engineers upload or paste a technical error screenshot (compiler output, browser console, terminal traceback, or cloud alert). Gemma 4 analyzes the screenshot multimodally and delivers:
 
-### Core User Flow
-```mermaid
-flowchart TD
-    Citizen["Citizen Complaint (Natural Language)"] --> AI["CivicAI Engine"]
-    AI --> Structure["Category + Severity (0-100) + Priority + Department Routing"]
-    Structure --> Case["Structured Case #CA-XXXX"]
-    Case --> Admin["Admin Dashboard Dispatch"]
-```
-
----
-
-## ✨ Key Features
-
-- **AI Classification:** Converts raw complaint text into standard municipal categories (*Road Infrastructure*, *Water & Sanitation*, *Electricity*, *Waste Management*, *Public Safety*, *Public Transport*).
-- **Smart Prioritization:** Generates dynamic severity scores (0–100) and maps priority levels (`HIGH`: 80–100, `MEDIUM`: 50–79, `LOW`: 0–49).
-- **Department Routing & Field Actions:** Generates specific recommended actions and assigns responsible municipal departments.
-- **Offline / Grounded Fallback Mode:** Operates seamlessly with Google Gemini API or deterministic local fallback analyzer for demo reliability.
-- **Admin Dashboard:** Real-time KPI stats (*Total*, *High Priority*, *Pending*, *Resolved*), live filters, search bar, and status management.
+1. **What is wrong:** Clear identification of the exact error and failure point.
+2. **Why it is happening:** Deep root cause diagnosis and mechanism.
+3. **How to fix it:** Step-by-step remediation guide with code/config solutions.
+4. **The immediate next action:** The single most critical step or command to run right away.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Frontend:** React 18 + Vite
+- **Styling:** Tailwind CSS + Lucide Icons
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS & Lucide Icons
-- **AI Integration:** Google Gemini API (`@google/generative-ai`) with Local Fallback Engine
+- **AI Engine:** Gemma 4 Multimodal via Google Gemini API (credentials via env var)
 
 ---
 
@@ -46,28 +33,30 @@ flowchart TD
    npm install
    ```
 
-2. **Run Development Server:**
+2. **Configure environment:**
+   ```bash
+   cp .env.example .env.local
+   # Set your VITE_GEMINI_API_KEY in .env.local
+   ```
+
+3. **Start the development server:**
    ```bash
    npm run dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-3. **Build Production Application:**
+4. **Build for production:**
    ```bash
    npm run build
    ```
 
 ---
 
-## 🧪 Demo Scenarios (Hyderabad Examples)
+## 🎯 Features in this MVP Foundation
 
-1. **Pothole (High Priority):**  
-   *"There is a huge pothole near MJCET and two accidents happened there this week."*
-2. **Water Leakage:**  
-   *"There has been a water leakage near Mehdipatnam for three days."*
-3. **Streetlight Failure:**  
-   *"The streetlight near the college road has not been working for several nights."*
-4. **Garbage Accumulation:**  
-   *"Garbage has not been collected from our street for four days."*
-5. **Damaged Road:**  
-   *"The road near the bus stop is badly damaged."*
+- **Drag & Drop + Clipboard Paste:** Drag files or press `Ctrl+V` to paste screenshots directly from your clipboard.
+- **Image Preview:** Clear visual thumbnail, file size, and remove/replace controls.
+- **Analysis Workflow:** One-click "Analyze Screenshot with Gemma 4" with active loading animations and step-by-step progress.
+- **Error Handling:** Built-in error alert with retry and dismiss controls.
+- **Structured 4-Part Output:** Dedicated visual cards for *What is wrong*, *Why it is happening*, *How to fix it*, and a high-visibility copyable *Immediate Next Action*.
+- **Quick Demo Mode:** Instant "Load sample error" button to test the UI and workflow without needing live credentials.
