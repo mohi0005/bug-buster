@@ -20,8 +20,8 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
 
   const processFile = useCallback((file: File) => {
     setFormatError(null);
-    if (!file.type.startsWith('image/')) {
-      setFormatError('Please upload an image file (PNG, JPG, JPEG, WEBP).');
+    if (!file.type.startsWith('image/') && !file.name.match(/\.(png|jpe?g|webp|gif|svg|bmp|ico)$/i)) {
+      setFormatError('Please upload an image file.');
       return;
     }
 
@@ -119,7 +119,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/png,image/jpeg,image/jpg,image/webp"
+        accept="image/*"
         onChange={handleInputChange}
         className="hidden"
         disabled={disabled}
@@ -168,7 +168,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           </div>
 
           <p className="text-[11px] text-slate-500 mt-4">
-            Supports PNG, JPG, JPEG, WEBP up to 10MB
+            All image formats allowed (PNG, JPG, WEBP, GIF, SVG, BMP) up to 10MB
           </p>
         </div>
       ) : (

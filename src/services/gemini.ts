@@ -91,12 +91,14 @@ function parseAnalysisResponse(rawText: string): BugAnalysis {
   try {
     const parsed = JSON.parse(cleaned);
     return {
-      whatIsWrong: parsed.whatIsWrong || 'Error detected in screenshot.',
-      whyItIsHappening: parsed.whyItIsHappening || 'Could not isolate exact root cause.',
+      whatIsWrong: parsed.whatIsWrong || parsed.problem || 'Error detected in screenshot.',
+      whyItIsHappening: parsed.whyItIsHappening || parsed.why || 'Could not isolate exact root cause.',
       howToFix: Array.isArray(parsed.howToFix)
         ? parsed.howToFix
-        : [parsed.howToFix || 'Inspect the stack trace and dependencies.'],
-      immediateNextAction: parsed.immediateNextAction || 'Check the highlighted file and line number.',
+        : Array.isArray(parsed.fix)
+        ? parsed.fix
+        : [parsed.howToFix || parsed.fix || 'Inspect the stack trace and dependencies.'],
+      immediateNextAction: parsed.immediateNextAction || parsed.next_action || 'Check the highlighted file and line number.',
       errorType: parsed.errorType || 'Runtime Error',
       confidence: parsed.confidence || 'High',
     };
